@@ -35,6 +35,7 @@ public class DietUserController {
 	private static final Logger log = LoggerFactory.getLogger(DietUserController.class);
 
 	
+	
 	//DI 의존성 주입
 	private DietService dietService;
 	private DietMapper dietMapper;
