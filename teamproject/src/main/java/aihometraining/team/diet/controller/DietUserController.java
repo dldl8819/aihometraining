@@ -35,7 +35,6 @@ public class DietUserController {
 	private static final Logger log = LoggerFactory.getLogger(DietUserController.class);
 
 	
-	
 	//DI 의존성 주입
 	private DietService dietService;
 	private DietMapper dietMapper;
@@ -75,14 +74,17 @@ public class DietUserController {
 		String memberEmail = (String) session.getAttribute("SEMAIL");
 		String today = LocalDate.now().toString();
 		
-		dietplan.setMemberEmail(memberEmail);
+		dietplan.setMemberEmail(memberEmail);	
 		dietplan.setDietPlanDay(today);
 
 		
 		List<HashMap<String, Object>> UserdietPlanList = dietService.selectUserDietPlan(dietplan);
-		
-		
 		model.addAttribute("UserdietPlanList",UserdietPlanList);
+		
+		HashMap<String, Object> UserdietPlanListNutrient = dietService.UserdietPlanList(UserdietPlanList);
+		model.addAttribute("UserdietPlanListNutrient", UserdietPlanListNutrient);
+		
+		
 		
 		
 		return "diet/dietMyList";
@@ -129,6 +131,9 @@ public class DietUserController {
 		List<HashMap<String, Object>> UserdietPlanList = dietService.selectUserDietPlan(dietplan);
 		model.addAttribute("UserdietPlanList",UserdietPlanList);
 
+		
+		
+		
 		return "diet/AjaxTable/DietUserMealplanedListAjax";
 	}
 	
@@ -141,6 +146,7 @@ public class DietUserController {
 		return deleteResult;
 	}
 	
+	//Ajax 식단 계획 페이지에서 실행 눌렀을 때, 혹은 취소 눌렀을 때 update
 	@PostMapping("/updateUserDietPlan")
 	@ResponseBody
 	public int updateUserDietPlan(DietPlan dietPlan) {
@@ -149,15 +155,22 @@ public class DietUserController {
 		
 		return updateResult;
 	}
-		
-		
-		
-
-
-
-		
-		
-		
 	
+	//Ajax User식단표 progress-bar 
+	@PostMapping("/updateProgress")
+	@ResponseBody
+	public HashMap<String, Object> updateProgress(Model model, DietPlan dietplan){
+		
+		List<HashMap<String, Object>> UserdietPlanList = dietService.selectUserDietPlan(dietplan);
+		model.addAttribute("UserdietPlanList",UserdietPlanList);
+		
+		HashMap<String, Object> UserdietPlanListNutrient = dietService.UserdietPlanList(UserdietPlanList);
+		model.addAttribute("UserdietPlanListNutrient", UserdietPlanListNutrient);
+		
+		log.info("나와바ㅗ : {}",UserdietPlanListNutrient);
+		
+		
+		return UserdietPlanListNutrient;
+	}
 }
 
