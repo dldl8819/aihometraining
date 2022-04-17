@@ -47,7 +47,7 @@ public class eClassService {
 	
 	public List<EClassOpenAppleyForm> MyApplyList(Map<String, Object> paramMap,String eClassOpenAppleyMemberEmail){
 		
-		List<EClassOpenAppleyForm> eClassOpenApply = eClassMapper.eClassOpenAppleyList(paramMap, eClassOpenAppleyMemberEmail);
+		List<EClassOpenAppleyForm> eClassOpenApply = eClassMapper.eClassOpenAppleyList(eClassOpenAppleyMemberEmail);
 		
 		return eClassOpenApply;
 	}

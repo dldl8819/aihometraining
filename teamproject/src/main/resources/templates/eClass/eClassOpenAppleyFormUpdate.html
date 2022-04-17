@@ -8,7 +8,7 @@
 	</th:block>
 
 	<th:block layout:fragment="customContents">
-		<form th:action="@{/openAppleyForm}">
+		<form th:action="@{/openAppley}">
 			<div class="container" style="border-radius: 30px; border: solid 5px #aa00cc;">
 				<div class="row" style="margin: 5px;">
 					<div class="col-12" style="padding-top: 10px;">
@@ -98,7 +98,7 @@
 				<div class="row" style="margin: 5px;">
 					<div class="col-12" style="padding: 10px; margin-top: 30px;">
 						<div class="col-12" style="text-align: center; border-radius: 30px; border: solid 3px #aa00cc;">
-							<h2 style="padding-top: 5px; margin-top: 5px;">커리큘럼 과정 짜기</h2>
+							<h2 style="padding-top: 5px; margin-top: 5px;">클래스에 대한 질문 및 답변</h2>
 						</div>
 						<div class="row">
 							<div class="col-8" id="questionTitle" style="padding-top: 10px;">
@@ -164,7 +164,7 @@
 												<h6>최소</h6>
 											</div>
 											<div class="col-3" style="margin-bottom: 10px;">
-												<input type="number" style="width: 100%;" name="eClassOpenAppleyStudent" placeholder="0">
+												<input type="number" style="width: 100%;" name="eClassOpenAppleyStudent" placeholder="1">
 											</div>
 											<div class="col-3" style="margin-top: 7px;">
 												<h6>명</h6>
@@ -191,10 +191,10 @@
 									<div class="col-6">
 										<div class="row">
 											<div class="col-5" style="margin-top: 7px;">
-												<h6>커리큘럼기간 설정</h6>
+												<h6>기간 및 금액 설정</h6>
 											</div>
 											<div class="col-4">
-												<input type="number" style="width: 100%;" name="eClassOpenAppleySetDate" placeholder="0">
+												<input type="number" style="width: 100%;" name="eClassOpenAppleySetDate" placeholder="1">
 											</div>
 											<div class="col-2" style="padding: 5px;">
 												<h6>개월</h6>

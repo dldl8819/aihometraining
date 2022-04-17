@@ -1,8 +1,6 @@
 package aihometraining.team.eClassController;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -97,13 +95,16 @@ public class eClassController {
 		  String mamberEmail = (String) session.getAttribute("SEMAIL");
 		  eClassService.EClassIntroduceInsert(eClassIntroduce, mamberEmail);
 		  eClassService.EClassSectionTitleInsert(eClassSectionTitle, mamberEmail);
-		  eClassService.EClassSectionCurriculumInsert(eClassSectionCurriculum,
-		  mamberEmail, eClassSectionTitle);
+		  eClassService.EClassSectionCurriculumInsert(eClassSectionCurriculum, mamberEmail, eClassSectionTitle);
 		  eClassService.EClassQuestionInsert(eClassQuestion, mamberEmail);
 		  eClassService.EClassAnswerInsert(eClassAnswer, mamberEmail, eClassQuestion);
-		  eClassService.EClassPriceInsert( eClassOpenAppleyForm , mamberEmail ,
-		  eClassIntroduce , eClassSectionTitle , eClassSectionCurriculum ,
-		  eClassQuestion , eClassAnswer);
+		  eClassService.EClassPriceInsert( eClassOpenAppleyForm
+				  						 , mamberEmail
+				  						 , eClassIntroduce 
+				  						 , eClassSectionTitle 
+				  						 , eClassSectionCurriculum 
+				  						 , eClassQuestion 
+				  						 , eClassAnswer);
 		  
 		  String qusetionCode = eClassQuestion.geteClassQuestionCode();
 		  eClassAnswer.seteClassQuestionCode(qusetionCode);
@@ -115,6 +116,46 @@ public class eClassController {
 		  log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassAnswer);
 		 
 		return "redirect:/eClassOpenAppleyComplete";
+	}
+	
+	@GetMapping("/openAppleyUpdate")
+	public String EClassOpenAppleyFormUpdate( Model model
+											, EClassIntroduce eClassIntroduce
+											, EClassSectionTitle eClassSectionTitle
+											, EClassSectionCurriculum eClassSectionCurriculum
+											, EClassQuestion eClassQuestion
+											, EClassAnswer eClassAnswer
+											, EClassOpenAppleyForm eClassOpenAppleyForm
+											, HttpSession session
+											,@RequestParam(value = "eClassOpenAppleyMemberEmail",required = false)String MemberEmail) {
+
+
+			String mamberEmail = (String) session.getAttribute("SEMAIL");
+			
+			//운동 클래스 카테고리 조회
+			List<EClassCategorySmall> eClassCategoryLargeList = eClassService.eClassCategoryLargeList();
+			List<EClassCategorySmall> eClassCategoryMediumList = eClassService.eClassCategoryMediumList();
+			
+			log.info("eClassController.javaOpenAppleyForm 데이터: {}", eClassCategoryLargeList); //받은 내용이 여기{}에 담긴다.
+			log.info("eClassController.javaOpenAppleyForm 데이터: {}", eClassCategoryMediumList); //받은 내용이 여기{}에 담긴다.
+
+			
+			model.addAttribute("title", "운통클래스 신청폼");
+			model.addAttribute("eClassCategoryLargeList", eClassCategoryLargeList);
+			model.addAttribute("eClassCategoryMediumList", eClassCategoryMediumList);
+			
+			//List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassMapper.eClassOpenAppleyList(eClassOpenAppleyMemberEmail);
+			//List<EClassIntroduce> introduceUpdate = eClassMapper.EClassAnswerInsert(eClassAnswer)
+					
+			//log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyMemberEmail : {}",eClassOpenAppleyMemberEmail);
+			//log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyMemberEmail : {}",eClassOpenAppleyList);
+			
+			//model.addAttribute("title", "나의 개설신청 현황");
+			//model.addAttribute("eClassOpenAppleyList", eClassOpenAppleyList);
+			
+			
+			
+		return "";
 	}
 	
 	
@@ -158,22 +199,14 @@ public class eClassController {
 							 ,HttpSession session) {
 		
 		String eClassOpenAppleyMemberEmail = (String) session.getAttribute("SEMAIL");
-		int appleyState = eClassOpenAppleyForm.geteClassOpenAppleyApproveState();
 		
-		List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassMapper.eClassOpenAppleyList(null, eClassOpenAppleyMemberEmail);
-		
-		Map<String, Object> paramMap = new HashMap<String , Object>();
-		List<EClassOpenAppleyForm> stateMap = eClassService.MyApplyList(paramMap, eClassOpenAppleyMemberEmail);
-		
-		paramMap = null;
-				
+		List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassMapper.eClassOpenAppleyList(eClassOpenAppleyMemberEmail);
 		
 		log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyMemberEmail : {}",eClassOpenAppleyMemberEmail);
-		log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyApproveState : {}",appleyState);
+		log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyMemberEmail : {}",eClassOpenAppleyList);
 		
 		model.addAttribute("title", "나의 개설신청 현황");
 		model.addAttribute("eClassOpenAppleyList", eClassOpenAppleyList);
-		model.addAttribute("eClassAppleyState", appleyState);
 		
 		
 		return "eClass/myEClassApplyList";
