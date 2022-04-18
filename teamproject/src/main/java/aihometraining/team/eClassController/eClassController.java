@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import aihometraining.team.dto.EClassAnswer;
+import aihometraining.team.dto.EClassApproved;
 import aihometraining.team.dto.EClassCategorySmall;
 import aihometraining.team.dto.EClassIntroduce;
-import aihometraining.team.dto.EClassOpenAppleyForm;
 import aihometraining.team.dto.EClassQuestion;
 import aihometraining.team.dto.EClassSectionCurriculum;
 import aihometraining.team.dto.EClassSectionTitle;
@@ -83,12 +83,13 @@ public class eClassController {
 	}
 	
 	@GetMapping("/openAppley")
-	public String EClassOpenAppleyFormInsert( EClassIntroduce eClassIntroduce
+	public String EClassOpenAppleyFormInsert( EClassCategorySmall eClassCategorySmall
+											, EClassIntroduce eClassIntroduce
 											, EClassSectionTitle eClassSectionTitle
 											, EClassSectionCurriculum eClassSectionCurriculum
 											, EClassQuestion eClassQuestion
 											, EClassAnswer eClassAnswer
-											, EClassOpenAppleyForm eClassOpenAppleyForm
+											, EClassApproved eClassApproved
 											, HttpSession session) {
 		
 		
@@ -98,17 +99,16 @@ public class eClassController {
 		  eClassService.EClassSectionCurriculumInsert(eClassSectionCurriculum, mamberEmail, eClassSectionTitle);
 		  eClassService.EClassQuestionInsert(eClassQuestion, mamberEmail);
 		  eClassService.EClassAnswerInsert(eClassAnswer, mamberEmail, eClassQuestion);
-		  eClassService.EClassPriceInsert( eClassOpenAppleyForm
-				  						 , mamberEmail
+		  eClassService.EClassPriceInsert( eClassApproved
+				  						 , eClassCategorySmall
+				  						 , mamberEmail 
 				  						 , eClassIntroduce 
 				  						 , eClassSectionTitle 
 				  						 , eClassSectionCurriculum 
 				  						 , eClassQuestion 
 				  						 , eClassAnswer);
 		  
-		  String qusetionCode = eClassQuestion.geteClassQuestionCode();
-		  eClassAnswer.seteClassQuestionCode(qusetionCode);
-		  
+		  log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassCategorySmall);
 		  log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassIntroduce);
 		  log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionTitle);
 		  log.info("운동클래스 신청 폼에서 입력 받은 데이터 : {}",eClassSectionCurriculum);
@@ -125,7 +125,7 @@ public class eClassController {
 											, EClassSectionCurriculum eClassSectionCurriculum
 											, EClassQuestion eClassQuestion
 											, EClassAnswer eClassAnswer
-											, EClassOpenAppleyForm eClassOpenAppleyForm
+											, EClassApproved eClassApproved
 											, HttpSession session
 											,@RequestParam(value = "eClassOpenAppleyMemberEmail",required = false)String MemberEmail) {
 
@@ -143,16 +143,6 @@ public class eClassController {
 			model.addAttribute("title", "운통클래스 신청폼");
 			model.addAttribute("eClassCategoryLargeList", eClassCategoryLargeList);
 			model.addAttribute("eClassCategoryMediumList", eClassCategoryMediumList);
-			
-			//List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassMapper.eClassOpenAppleyList(eClassOpenAppleyMemberEmail);
-			//List<EClassIntroduce> introduceUpdate = eClassMapper.EClassAnswerInsert(eClassAnswer)
-					
-			//log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyMemberEmail : {}",eClassOpenAppleyMemberEmail);
-			//log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyMemberEmail : {}",eClassOpenAppleyList);
-			
-			//model.addAttribute("title", "나의 개설신청 현황");
-			//model.addAttribute("eClassOpenAppleyList", eClassOpenAppleyList);
-			
 			
 			
 		return "";
@@ -194,13 +184,12 @@ public class eClassController {
 	
 	@GetMapping("/myApplyList")
 	public String MyApplyList(Model model
-							 ,@RequestParam(value = "eClassOpenAppleyMemberEmail",required = false)String MemberEmail
-							 ,EClassOpenAppleyForm eClassOpenAppleyForm
+							 ,EClassApproved eClassApproved
 							 ,HttpSession session) {
 		
 		String eClassOpenAppleyMemberEmail = (String) session.getAttribute("SEMAIL");
 		
-		List<EClassOpenAppleyForm> eClassOpenAppleyList = eClassMapper.eClassOpenAppleyList(eClassOpenAppleyMemberEmail);
+		List<EClassApproved> eClassOpenAppleyList = eClassMapper.eClassOpenAppleyList(eClassOpenAppleyMemberEmail);
 		
 		log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyMemberEmail : {}",eClassOpenAppleyMemberEmail);
 		log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyMemberEmail : {}",eClassOpenAppleyList);

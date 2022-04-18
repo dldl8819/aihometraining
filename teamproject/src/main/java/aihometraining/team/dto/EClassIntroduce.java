@@ -5,7 +5,6 @@ import java.sql.Date;
 public class EClassIntroduce {
 	private String eClassIntroduceCode;
 	private String memberEmail;
-	private String eClassCategorySmallCode;
 	private String eClassIntroduceContent;
 	private String memberUpdateEmail;
 	private Date eClassIntroducetDate;
@@ -22,12 +21,6 @@ public class EClassIntroduce {
 	}
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
-	}
-	public String geteClassCategorySmallCode() {
-		return eClassCategorySmallCode;
-	}
-	public void seteClassCategorySmallCode(String eClassCategorySmallCode) {
-		this.eClassCategorySmallCode = eClassCategorySmallCode;
 	}
 	public String geteClassIntroduceContent() {
 		return eClassIntroduceContent;
@@ -56,7 +49,7 @@ public class EClassIntroduce {
 	@Override
 	public String toString() {
 		return "EClassIntroduce [eClassIntroduceCode=" + eClassIntroduceCode + ", memberEmail=" + memberEmail
-				+ ", eClassCategorySmallCode=" + eClassCategorySmallCode + ", eClassIntroduceContent="
+				+ ", eClassCategorySmallCode=" + ", eClassIntroduceContent="
 				+ eClassIntroduceContent + ", memberUpdateEmail=" + memberUpdateEmail + ", eClassIntroducetDate="
 				+ eClassIntroducetDate + ", eClassIntroduceImg=" + eClassIntroduceImg + "]";
 	}
