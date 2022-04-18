@@ -1,5 +1,6 @@
 package aihometraining.team.dto;
 
+
 public class DietBank {
 	
 	private String dietBankCode;
@@ -10,6 +11,8 @@ public class DietBank {
 	private String dietBankUpdateDate;
 	private String dietBankViewId;
 	private String dietBankCallViewId;
+	
+	
 	
 	
 	
