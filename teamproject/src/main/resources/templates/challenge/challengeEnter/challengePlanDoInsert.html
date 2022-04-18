@@ -22,6 +22,50 @@
 			<div class="section-top-border">
 		        <div class="row justify-content-center">
 			        <div class="col-lg-8 col-md-8">
+			        	<form class="form-contact gatherInsert_form" th:action="@{/challenge/challengeGather/challengeGatherInsert}" method="post" id="gatherInsert" novalidate="novalidate">
+		                	<h3 class="mb-4 mt-5">챌린지 모집 기본 등록사항</h3>
+		                	
+			                    <div class="col-12">
+			                        <div class="form-group mb-3">
+			                            <input class="form-control valid" name="challengeGatherName" id="challengeGatherName" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 모집명'" placeholder="챌린지 모집명">
+			                        </div>
+			                    </div>
+			                    <div class="form-group">
+				                    <label class="control-label pl-3" style="color:#BDBDCC; font-size: 13px;">챌린지 카테고리 </label>
+				                    <div class="form-select mb-3 pl-3 pr-3">
+				                    	<select id="challengeCategoryCode" name="challengeCategoryCode" required>
+											<th:block th:if="${not #lists.isEmpty(challengeCateList)}" th:each="l : ${challengeCateList}" >
+												<option th:value="${l.challengeCategoryCode}">[[${l.challengeCategoryName}]]</option>
+											</th:block>
+											<th:block th:unless="${not #lists.isEmpty(challengeCateList)}">
+												<option >등록된 카테고리가 없습니다.</option>
+											</th:block>
+										</select>
+				                    </div>
+								</div>			                    
+			                    <div class="col-12">
+			                        <div class="form-group mb-3">
+			                            <input class="form-control" name="challengeGatherMaxPeople" id="challengeGatherMaxPeople" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 최대 참여 인원수'" placeholder="챌린지 최대 참여 인원수">
+			                        </div>
+			                    </div>									
+			                    <div class="col-12">
+			                        <div class="form-group mb-3">
+			                            <textarea class="form-control w-100" name="challengeGatherIntro" id="challengeGatherIntro" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 소개'" placeholder=" 챌린지 소개"></textarea>
+			                        </div>
+			                    </div>
+			                    <div class="mb-3 pt-5 pb-3 pl-3 pr-3" style=" border: none;">
+						            <div class="col-lg-6 col-11 px-1">
+						                <div class="input-group input-daterange form-group"> 
+							                <input type="text" id="challengeGatherStart" name="challengeGatherStartDate" class="form-control text-left mr-2"> 
+							                	<label class="ml-3 form-control-placeholder" id="challengGatherStart-p" for="challengeGatherStart">챌린지 모집 시작일</label> 
+							                <span class="fa fa-calendar" id="fa-1"></span> 
+							                <input type="text" id="challengeGatherEnd" name="challengeGatherEndDate" class="form-control text-left ml-2"> 
+							                	<label class="ml-3 form-control-placeholder" id="challengeGatherEnd-p" for="challengeGatherEnd">챌린지 모집 종료일</label> 
+							                <span class="fa fa-calendar" id="fa-2"></span> 
+						                </div>
+						            </div>
+						        </div>									
+		            	</form>
 				        <form class="mb-5" action="#">
 							<h3 class="mb-4">챌린지 인증 등록사항</h3>
 								<div class="mt-2">
@@ -57,14 +101,15 @@
 									onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 인증'" required
 									class="single-input">
 								</div>
-								<div class="card p-3 mt-2" style="background-color: #f9f9ff; border: none;">
-									<div id="summernote">인증내용을 작성해주세요</div>
-								</div>
+								<div class="col-12">
+			                        <div class="form-group mb-3">
+			                            <textarea class="form-control w-100" name="challengeGatherIntro" id="challengeGatherIntro" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = '챌린지 소개'" placeholder=" 챌린지 소개"></textarea>
+			                        </div>
+			                    </div>
+			                <div class="form-group mt-3 row justify-content-center">
+			                    <button type="submit" class="button button-contactForm boxed-btn">모집 등록</button>
+			                </div>
 						</form>
-						
-						<div class="row justify-content-center">
-			  				<button class="genric-btn primary radius" type="submit">등록완료</button>
-						</div>
 					</div>
 				</div>
 			</div>
