@@ -73,7 +73,6 @@
 	           <!--  <div class="form-input">
 	                <label for="name">이메일 확인</label>
 	                <input type="email" placeholder="﻿example@email.com">
-	                th:if="${session.SEMAIL != null && session.SLEVEL != 'levelCode001'}"
 	            </div> -->
 	            <div class="form-input">
 	                <label for="name">비밀번호</label>
@@ -82,7 +81,7 @@
 	                <br/>
 	                <label for="name">비밀번호 확인</label>
 	                <input type="password" name="memberPwCheck" id="password2" placeholder="********">
-	                <p id="p2" class="text-white">영문, 숫자, 특수문자를 혼합하여 입력해주세요.</p>
+	                <p id="p2" class="text-white">영문, 숫자, 특수 문자를 혼합하여 8~10자리로 입력해주세요.</p>
 	            </div>
 	            <!-- <div class="form-input">
 	                <label for="name">비밀번호 확인</label>
@@ -220,7 +219,7 @@
 			function()
 		}
 		if($('#password1').val() == ""){
-			$('#p1').val("영문, 숫자, 특수문자를 혼합하여 입력해주세요.");
+			$('#p1').val("영문, 숫자, 특수 문자를 혼합하여 8~10자리로 입력해주세요.");
 		}
 		
 		
@@ -239,7 +238,7 @@
 			  alert("비밀번호는 공백 없이 입력해주세요.");
 			  return false;
 			 }else if(num < 0 || eng < 0 || spe < 0 ){
-			  alert("영문, 숫자, 특수문자를 혼합하여 입력해주세요.");
+			  alert("영문, 숫자, 특수 문자를 혼합하여 8~10자리로 입력해주세요.");
 			  return false;
 			 }else {
 				console.log("통과"); 
