@@ -31,6 +31,7 @@ import aihometraining.team.dto.DietPlan;
 public class DietController {
 	
 	
+	
 	private static final Logger log = LoggerFactory.getLogger(DietController.class);
 
 	
