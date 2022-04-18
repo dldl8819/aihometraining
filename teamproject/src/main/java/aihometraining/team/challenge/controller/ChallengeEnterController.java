@@ -112,8 +112,17 @@ private static final Logger log = LoggerFactory.getLogger(ChallengeEnterControll
 		challengeEnterService.challengePlanDoInsert(challengeGatherPlanDo, sEmail, fileImage, fileRealPath);
 		
 		
-		return "redirect:/challenge/challengeEnter/challengeEnterList";
+		return "redirect:/challenge/challengeEnter/challengePlanDoList";
 		
+	}
+	
+	@GetMapping("/challengePlanDoList")
+	public String challengePlanDoList(Model model) {
+		
+		model.addAttribute("title", "인증 챌린지 목록");
+		model.addAttribute("leftMenuList", "챌린지");
+		
+		return "challenge/challengeEnter/challengePlanDoList";
 	}
 	
 	@GetMapping("/challengeEnterPaymemt")
