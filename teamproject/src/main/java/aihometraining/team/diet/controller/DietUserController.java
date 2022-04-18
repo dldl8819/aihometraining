@@ -172,5 +172,18 @@ public class DietUserController {
 		
 		return UserdietPlanListNutrient;
 	}
+	
+	
+	//Ajax user diet에서 식단은행 불러오기 
+	@PostMapping("/selectDietBankList")
+	public String selectDietBankListByUser(Model model) {
+		List<DietBank> dietBankList = dietMapper.getDietBankListAdmin();
+		model.addAttribute("dietBankList", dietBankList);
+		
+		
+		log.info("뱅크값:{}",dietBankList);
+		
+		return "diet/AjaxTable/dietMyListSelectBankAjax";
+	}
 }
 

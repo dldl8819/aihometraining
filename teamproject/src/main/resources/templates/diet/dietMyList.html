@@ -25,8 +25,13 @@
 			display:none;
 		}
 		
+		
+		
 	
 	</style>
+		
+		
+		
 		
 		<div class="container">
 			 <div class="properties__card" >
@@ -36,7 +41,7 @@
 							<input type="text" id="datePicker" class="date-input">
 						</div>
 						<div class="col-auto">
-							<button class="genric-btn primary-border radius">
+							<button class="genric-btn primary-border radius" id="selectDietBank-btn" data-toggle="modal" data-target="#selectdietBankModal"> 
 								<i class="bi bi-plus-square"></i>
 								식단은행 가져오기
 							</button>
@@ -44,6 +49,17 @@
 					</div>
 				  </div>
 			 	
+				
+				
+			<!-- 식단은행 불러오기 Modal -->
+				<div class="modal fade " id="selectdietBankModal" tabindex="-1" aria-labelledby="selectdietBankModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-lg" >
+				   	<div class="modal-content" id="selectDietBankModalIn" th:replace="/diet/AjaxTable/dietMyListSelectBankAjax.html :: fragment-SelectDietBankList">
+				    	
+				   </div>
+				  </div>
+				</div>
+					
 			 	
 				<div class="card-body ">
 					
@@ -273,8 +289,18 @@
 											
 											$('.NutrientBar').each(function(){
 												
-												var DoneNu = $(this).children().eq(1).text(DoneList[count]);
-												var Nu = $(this).children().eq(3).text(KcalList[count]);
+												var degree = null;
+												
+												if(count == 0){
+													degree = "kcal"; 
+												}else if(count == 4){
+													degree = "mg"
+												}else{
+													degree = "g";
+												}
+												
+												var DoneNu = $(this).children().eq(1).text(DoneList[count]+degree);
+												var Nu = $(this).children().eq(3).text(KcalList[count]+degree);
 												var result = DoneList[count]/KcalList[count]*100+"%";
 												
 												console.log(result);
@@ -286,7 +312,9 @@
 								});
 							}
 						
-						
+				
+			<!-- 데이트피커 -->
+			
 						var dayChange = function(){
 							
 							var DayCheck = null;
@@ -371,7 +399,9 @@
 							dayChange();
 						});
 						
-		
+			
+					
+						
 			<!-- 실행/취소 버튼 클릭 update -->
 			$('.planDo-Btn').click(function(e){
 				var dietPlanDoValue = 1;
@@ -478,7 +508,23 @@
 					});
 			});
 			
-		
+			<!-- 식단은행 불러오기 -->	
+				$('#selectDietBank-btn').click(function(){
+					
+					console.log("식단은행 실행된다");
+					
+					$.ajax({
+						 url: '/diet/mypage/selectDietBankList'
+						,type: 'POST'
+						//,data: {'mainMealSort' : mainMealSort}
+						,dataType: 'text'
+						,success: function(data){
+							$('#selectDietBankModalIn').replaceWith	(data);
+						}
+					});
+					
+					
+				});
 		
 						
 						
