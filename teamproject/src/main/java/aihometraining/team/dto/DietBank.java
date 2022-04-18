@@ -8,8 +8,23 @@ public class DietBank {
 	private String dietBankInsertDate;
 	private String memberUpdateEmail;
 	private String dietBankUpdateDate;
+	private String dietBankViewId;
+	private String dietBankCallViewId;
 	
 	
+	
+	public String getDietBankCallViewId() {
+		return dietBankCallViewId;
+	}
+	public void setDietBankCallViewId(String dietBankCallViewId) {
+		this.dietBankCallViewId = dietBankCallViewId;
+	}
+	public String getDietBankViewId() {
+		return dietBankViewId;
+	}
+	public void setDietBankViewId(String dietBankViewId) {
+		this.dietBankViewId = dietBankViewId;
+	}
 	public String getDietBankCode() {
 		return dietBankCode;
 	}
