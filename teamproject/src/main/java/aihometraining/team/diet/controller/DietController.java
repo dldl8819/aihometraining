@@ -144,7 +144,6 @@ public class DietController {
 		List<HashMap<String, Object>> selectOneMealConn = dietMapper.selectDietOneMealConnectionByBankCode(dietOnemealConnection);
 		model.addAttribute("selectOneMealConn", selectOneMealConn);
 		
-		System.out.println(selectOneMealConn+"찾아찾아");
 		
 		
 		return "diet/updateDietBankList";
