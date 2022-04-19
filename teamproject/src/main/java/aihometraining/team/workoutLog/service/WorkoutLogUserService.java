@@ -67,9 +67,9 @@ public class WorkoutLogUserService {
 	}
 	
 	//일지 목록 조회
-	public List<WorkoutLog>	getworkoutLogList(){
+	public List<WorkoutLog>	getworkoutLogList(String sessionEmail){
 		
-		List<WorkoutLog> workoutLogList = workoutLogUserMapper.getworkoutLogList();
+		List<WorkoutLog> workoutLogList = workoutLogUserMapper.getworkoutLogList(sessionEmail);
 		
 		log.info("workoutLogList : {}", workoutLogList);
 		
@@ -131,9 +131,9 @@ public class WorkoutLogUserService {
 
 	
 	// 운동 목표 목록 조회
-	public List<WorkoutGoal> getworkoutGoalList(){
+	public List<WorkoutGoal> getworkoutGoalList(String sessionEmail){
 	
-		List<WorkoutGoal> workoutGoalList = workoutLogUserMapper.getworkoutGoalList();
+		List<WorkoutGoal> workoutGoalList = workoutLogUserMapper.getworkoutGoalList(sessionEmail);
 		
 		return workoutGoalList;
 		
