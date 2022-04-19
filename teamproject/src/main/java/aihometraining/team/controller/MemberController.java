@@ -186,7 +186,7 @@ public class MemberController {
 	
 	
 	/**
-	 *  이메일 중복 확인
+	 *  이메일 중복 체크
 	 *  emailCheck ajax
 	 *  @RequestParam(value = "memberEmail") == request.getParameter("memberEmail");
 	 */
