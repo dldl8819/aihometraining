@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import aihometraining.team.dto.AIVideo;
 import aihometraining.team.dto.WorkoutLog;
 import aihometraining.team.dto.WorkoutLogCategory;
 import aihometraining.team.mapper.CommonMapper;
@@ -71,6 +72,16 @@ public class WorkoutLogConfigService {
 		List<WorkoutLog> workoutLogNewList = workoutLogConfigMapper.getNewWorkoutLog();
 		
 		return workoutLogNewList;
+		
+	}
+	
+	//AIVideo 영상(이미지 대체) 등록 처리
+	public int workoutAIVideoInsert(AIVideo aiVideo) {
+		
+		String filecode = commonMapper.getNewCode("fileIdx", "aivideo");
+		aiVideo.setFileIdx(filecode);
+		
+		return workoutLogConfigMapper.workoutAIVideoInsert(aiVideo);
 		
 	}
 	

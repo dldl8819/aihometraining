@@ -11,7 +11,7 @@
 	</resultMap>
 	
 	<resultMap type="WorkoutLog" id="WorkoutLogResultMap">
-			<id 	column="workoutLogCode" 				property="workoutLogCode"/>
+			<result column="workoutLogCode" 				property="workoutLogCode"/>
 			<result column="memberEmail" 					property="memberEmail"/>
 			<result column="workoutLogLikeCount" 			property="workoutLogLikeCount"/>
 			<result column="eClassCategorySmallCode" 		property="eClassCategorySmallCode"/>
@@ -36,8 +36,45 @@
 				<result column="fileNewName" 				property="fileNewName"/>
 				<result column="filePath" 					property="filePath"/>
 				<result column="fileSize" 					property="fileSize"/>
-			</collection>	
+		</collection>	
 	</resultMap>
+	<resultMap type="AIVideo" id="AIVideoResultMap">
+			<result column="fileIdx" 					property="fileIdx"/>
+			<result column="memberEmail" 				property="memberEmail"/>
+			<result column="AIeVideoRegDate" 			property="AIeVideoRegDate"/>
+			<result column="memberUpdateEmail" 			property="memberUpdateEmail"/>
+			<result column="AIeVideoUpdateDate" 		property="AIeVideoUpdateDate"/>
+			<result column="AIeVideoTitle" 				property="AIeVideoTitle"/>
+		
+		<collection property="fileList" javaType="List" ofType="FileDto">
+				<id column="fileIdx" 						property="fileIdx"/>
+				<result	column="fileOriginalName" 			property="fileOriginalName"/>
+				<result column="fileNewName" 				property="fileNewName"/>
+				<result column="filePath" 					property="filePath"/>
+				<result column="fileSize" 					property="fileSize"/>
+		</collection>	
+	</resultMap>
+	
+	
+	<insert id="workoutAIVideoInsert" parameterType="AIVideo">
+		/* AI Video 영상(이미지로 대체) 등록 */
+		INSERT INTO aivideo
+		(
+				  fileIdx
+				, memberEmail
+				, AIeVideoRegDate
+				, memberUpdateEmail
+				, AIeVideoUpdateDate
+				, AIeVideoTitle
+		)VALUES (
+				  'fileIdx_1'
+				, 'id001@email.com'
+				, NOW()
+				, null
+				, NOW()
+				, '사이드런지'
+		);
+	</insert>
 	
 	<select id="getNewWorkoutLog" resultMap="WorkoutLogResultMap">
 		/* 새롭게 등록된 일지 조회 */

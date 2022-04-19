@@ -57,15 +57,17 @@ public class WorkoutLogUserController {
 	
 	// 일지 메인 화면
 	@GetMapping("/workoutLogMain")
-	public String workoutLogMain(Model model) {
+	public String workoutLogMain(Model model, HttpSession session) {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
 		
 		//운동 목표 목룍 조회
-		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList(sessionEmail);
 		
 		//log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
 		
 		//일지 목록 조회
-		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
+		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList(sessionEmail);
 		
 		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
 
@@ -98,17 +100,21 @@ public class WorkoutLogUserController {
 	@GetMapping("/workoutLogList")
 	public String workoutLogList(Model model
 								,@RequestParam(value = "workoutLogCode", required = false) String workoutLogCode
-								,@RequestParam(value = "filePath", required = false) String filePath) {
+								,@RequestParam(value = "filePath", required = false) String filePath
+								,HttpSession session) {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
 		log.info("파일 주소 : " , filePath);
 		//운동 목표 목록 조회
-		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList(sessionEmail);
 		log.info("운동 목표 목록 조회  workoutGoalList : {}", workoutGoalList);
 		
 		WorkoutLog workoutLogbyCode = workoutLogUserService.getworkoutLogByCode(workoutLogCode);
 		log.info("일지 코드로 일지 목록 조회  workoutLogbyCode : {}", workoutLogbyCode);
 		
 		//일지 목록 조회
-		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
+		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList(sessionEmail);
 		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
 		
 		log.info("일지 코드  workoutLogCode : {}", workoutLogCode);
@@ -126,9 +132,13 @@ public class WorkoutLogUserController {
 	@GetMapping("/workoutLogListFeedback")
 	public String workoutLogListFeedback(Model model
 										,@RequestParam(value = "workoutLogTitle", required = false) String workoutLogTitle
-										,@RequestParam(value = "workoutLogContent", required = false) String workoutLogContent) {
+										,@RequestParam(value = "workoutLogContent", required = false) String workoutLogContent
+										,HttpSession session) {
+		
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
 		//일지 목록 조회
-		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList();
+		List<WorkoutLog> workoutLogList = workoutLogUserService.getworkoutLogList(sessionEmail);
 		log.info("일지 목록 조회  workoutLogList : {}", workoutLogList);
 		
 		model.addAttribute("title", "일지 상세 화면");
@@ -278,9 +288,11 @@ public class WorkoutLogUserController {
 	
 	// 운동 목표 목록 조회
 	@GetMapping("/workoutGoalList")
-	public String workoutGoalList(Model model) {
+	public String workoutGoalList(Model model, HttpSession session) {
 		
-		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList(sessionEmail);
 		
 		model.addAttribute("title", "운동 목표");
 		model.addAttribute("workoutGoalList", workoutGoalList);
@@ -311,9 +323,11 @@ public class WorkoutLogUserController {
 	
 	//운동 계획 화면
 	@GetMapping("/workoutGoalPlanList")
-	public String workoutGoalPlanList(Model model) {
+	public String workoutGoalPlanList(Model model, HttpSession session) {
 		
-		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList();
+		String sessionEmail = (String) session.getAttribute("SEMAIL");
+		
+		List<WorkoutGoal> workoutGoalList = workoutLogUserService.getworkoutGoalList(sessionEmail);
 		
 		model.addAttribute("title", "운동 계획");
 		model.addAttribute("workoutGoalList", workoutGoalList);
