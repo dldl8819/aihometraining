@@ -1,7 +1,6 @@
 package aihometraining.team.eclassService;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +44,7 @@ public class eClassService {
 		return eClassCategoryMediumList;
 	}
 	
-	public List<EClassApproved> MyApplyList(Map<String, Object> paramMap,String eClassOpenAppleyMemberEmail){
+	public List<EClassApproved> MyApplyList(String eClassOpenAppleyMemberEmail){
 		
 		List<EClassApproved> eClassOpenApply = eClassMapper.eClassOpenAppleyList(eClassOpenAppleyMemberEmail);
 		
@@ -165,14 +164,14 @@ public class eClassService {
 		String answerCode = eClassAnswer.geteClassAnswerCode();
 		eClassApproved.seteClassAnswerCode(answerCode);
 		
-		log.info("EClassPriceInsert EClassOpenApplyForm 데이터: {}", eClassApproved);
-		
-		log.info("eClassService EClassPriceInsert 에 들어온 데이터 : {}", priceCode);
-		log.info("eClassService EClassPriceInsert 에 들어온 데이터 : {}", introduceCode);
-		log.info("eClassService EClassPriceInsert 에 들어온 데이터 : {}", sectionCode);
-		log.info("eClassService EClassPriceInsert 에 들어온 데이터 : {}", curriculumCode);
-		log.info("eClassService EClassPriceInsert 에 들어온 데이터 : {}", questionCode);
-		log.info("eClassService EClassPriceInsert 에 들어온 데이터 : {}", answerCode);
+		log.info("eClassService EClassPriceInsert 데이터: {}", eClassApproved);
+		log.info("eClassService EClassPriceInsert 데이터: {}", memberEmail);
+		log.info("eClassService EClassPriceInsert 데이터 : {}", priceCode);
+		log.info("eClassService EClassPriceInsert 데이터 : {}", introduceCode);
+		log.info("eClassService EClassPriceInsert 데이터 : {}", sectionCode);
+		log.info("eClassService EClassPriceInsert 데이터 : {}", curriculumCode);
+		log.info("eClassService EClassPriceInsert 데이터 : {}", questionCode);
+		log.info("eClassService EClassPriceInsert 데이터 : {}", answerCode);
 		
 		int result = eClassMapper.EClassPriceInsert(eClassApproved);
 		

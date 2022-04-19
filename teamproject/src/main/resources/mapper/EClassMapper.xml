@@ -202,7 +202,7 @@
 	
 	<insert id="EClassPriceInsert" parameterType="EClassApproved">
 		/* 클래스 등록 처리 */
-		INSERT(
+		INSERT INTO eclassapproved(
 			 eClassApprovedCode
 			,memberEmail
 			,eClassCategorySmallCode
@@ -393,13 +393,14 @@
 		SELECT
 			 ea.eClassApprovedName
 			,ea.eClassApprovedPrice
+			,ei.eClassIntroduceContent
 		FROM
 			eclassapproved AS ea
-		INNER JOIN 
+		INNER JOIN
 			eclassintroduce AS ei
 		ON
-			ea.eClassApprovedCode = ei.eClassIntroduceCode
-		WHERE 
+			ea.eClassIntroduceCode = ei.eClassIntroduceCode
+		WHERE
 			ea.memberEmail = #{memberEmail};
 	</select>
 	

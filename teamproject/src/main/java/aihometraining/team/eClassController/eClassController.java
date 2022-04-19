@@ -189,7 +189,7 @@ public class eClassController {
 		
 		String eClassOpenAppleyMemberEmail = (String) session.getAttribute("SEMAIL");
 		
-		List<EClassApproved> eClassOpenAppleyList = eClassMapper.eClassOpenAppleyList(eClassOpenAppleyMemberEmail);
+		List<EClassApproved> eClassOpenAppleyList = eClassService.MyApplyList(eClassOpenAppleyMemberEmail);
 		
 		log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyMemberEmail : {}",eClassOpenAppleyMemberEmail);
 		log.info("eClassOpenAppleyList MyApplyList eClassOpenAppleyMemberEmail : {}",eClassOpenAppleyList);
