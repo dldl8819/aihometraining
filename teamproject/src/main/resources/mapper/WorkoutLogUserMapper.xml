@@ -334,7 +334,7 @@
 				ON 
 				fc.fileIdx = f.fileIdx
 			WHERE
-				wl.memberEmail = 'id005@email.com';
+				wl.memberEmail = #{memberEmail};
 				
 		</select>
 		
@@ -371,7 +371,7 @@
 				ON 
 				w.memberEmail = m.memberEmail
 			WHERE
-				w.memberEmail = 'id004@email.com';
+				w.memberEmail = #{memberEmail};
 		</select>
 		
 		<select id="getworkoutLogPrivacyboundsList" resultType="WorkoutLogPrivacybounds">
