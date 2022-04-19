@@ -126,8 +126,7 @@ public class eClassController {
 											, EClassQuestion eClassQuestion
 											, EClassAnswer eClassAnswer
 											, EClassApproved eClassApproved
-											, HttpSession session
-											,@RequestParam(value = "eClassOpenAppleyMemberEmail",required = false)String MemberEmail) {
+											, HttpSession session) {
 
 
 			String mamberEmail = (String) session.getAttribute("SEMAIL");

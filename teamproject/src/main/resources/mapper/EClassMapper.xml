@@ -419,36 +419,51 @@
 			eo.eClassOpenAppleyMemberEmail = #{memberEmail};
 	</select>
 	
-	<select id="eClassIntroduceList" parameterType="String" resultMap="eClassIntroduceResultMap">
-		/* 신청한 운동클래스 introduce  */
+	<select id="eClassApprovedList" parameterType="String" resultMap="eClassApprovedResultMap">
+		/* 신청한 운동클래스 또는 승인된 운동클래스 수정처리를 위한 조회 */
 		SELECT
-			ei.eClassIntroduceContent
+			 ecs.eClassCategorySmallName
+			,ei.eClassIntroduceContent
+			,es.eClassSectionTitleName
+			,esc.eClassSectionCurriculumTitle
+			,eq.eClassQuestionTitle
+			,ean.eClassAnsweTitle
+			,ea.eClassApprovedPrice
+			,ea.eClassApprovedName
+			,ea.eClassApprovedSetDate
+			,ea.eClassApprovedStratDate
+			,ea.eClassApprovedEndDate
+			,ea.eClassApprovedStudent
+			,ea.eClassApprovedMaxStudent
 		FROM
+			eclassapproved AS ea
+		INNER JOIN
+			eclasscategorysmall AS ecs
+		ON
+			ea.eClassCategorySmallCode = ecs.eClassCategorySmallCode
+		INNER JOIN
 			eclassintroduce AS ei
-		WHERE 
-			ei.memberEmail = #{memberEmail};
-	</select>
-	
-	<select id="eClassSectionList" parameterType="String" resultMap="eClassSectionTitleResultMap">
-		/* 신청한 운동클래스 section */
-		SELECT
-			es.eClassSectionTitleName
-		FROM
+		ON
+			ea.eClassIntroduceCode = ei.eClassIntroduceCode
+		INNER JOIN
 			eclasssectiontitle AS es
-		WHERE
-			es.memberEmail = #{memberEmail};
-	</select>
-	
-	<select id="eClassCurriculumList" parameterType="String" resultMap="eClassSectionCurriculumResultMap">
-		SELECT
-			esc.eClassSectionCurriculumTitle
-		FROM
+		ON
+			ea.eClassSectionTitleCode = es.eClassSectionTitleCode
+		INNER JOIN
 			eclasssectioncurriculum AS esc
+		ON
+			ea.eClassSectionCurriculumCode = esc.eClassSectionCurriculumCode
+		INNER JOIN
+			eclassquestion AS eq
+		ON
+			ea.eClassQuestionCode = eq.eClassQuestionCode
+		INNER JOIN
+			eclassanswer AS ean
+		ON
+			ea.eClassAnswerCode = ean.eClassAnswerCode
 		WHERE
-			esc.memberEmail = #{memberEmail};
+			ea.memberEmail ='id001@email.com';
 	</select>
-		
-	<select id=""></select>
 	
 	
 	
